@@ -154,6 +154,64 @@ function findMax(arg1, arg2, arg3) {
     return Math.max(arg1, arg2, arg3);
 }
 
+function updateVisibleFilters(whichGraph) {
+    const xAxisFilter = d3.select("#xAxisSlider");
+    const xAxisFilterValue = d3.select("#xAxisSliderValue");
+    const xAxisFilterText = d3.select("#xAxisSliderText");
+
+    const selectCountriesFilter = d3.select("#countryDropdown");
+    const selectCountriesFilterText = d3.select("#countryDropdownText");
+
+    const selectVariableFilter = d3.select("#variableDropdown");
+    const selectVariableFilterText = d3.select("#variableDropdownText");
+
+    const chooseVariableFilter = d3.select("#unhealthyVariableDropdown");
+    const chooseVariableFilterText = d3.select("#unhealthyVariableDropdownText");
+    if (whichGraph === 1) {
+        //filters: x-axis filter, select countries multi-select
+        xAxisFilter.style("display", "block");
+        xAxisFilterValue.style("display", "block");
+        xAxisFilterText.style("display", "block");
+
+        selectCountriesFilter.style("display", "block");
+        selectCountriesFilterText.style("display", "block");
+
+        selectVariableFilter.style("display", "none");
+        selectVariableFilterText.style("display", "none");
+
+        chooseVariableFilter.style("display", "none");
+        chooseVariableFilterText.style("display", "none");
+    } else if (whichGraph === 2) {
+        //filters: Select Variable
+        xAxisFilter.style("display", "none");
+        xAxisFilterValue.style("display", "none");
+        xAxisFilterText.style("display", "none");
+
+        selectCountriesFilter.style("display", "none");
+        selectCountriesFilterText.style("display", "none");
+
+        selectVariableFilter.style("display", "block");
+        selectVariableFilterText.style("display", "block");
+
+        chooseVariableFilter.style("display", "none");
+        chooseVariableFilterText.style("display", "none");
+    }else if (whichGraph === 3) {
+        //filters: choose variable
+        xAxisFilter.style("display", "none");
+        xAxisFilterValue.style("display", "none");
+        xAxisFilterText.style("display", "none");
+
+        selectCountriesFilter.style("display", "none");
+        selectCountriesFilterText.style("display", "none");
+
+        selectVariableFilter.style("display", "none");
+        selectVariableFilterText.style("display", "none");
+
+        chooseVariableFilter.style("display", "block");
+        chooseVariableFilterText.style("display", "block");
+    }
+}
+
 function initialiseSVG(){
     svg.attr("width",width);
     svg.attr("height",height);
@@ -519,6 +577,7 @@ function updateChart1(data, selectedCountries=null, title = "") { //3 different 
             .text(title);
     }
     whichGraph = 1;
+    updateVisibleFilters(whichGraph);
 }
 
 
@@ -674,6 +733,7 @@ function updateChart2(data, selectedVar="AQI.Value", title = "") { //3 different
         tooltip.style("display", "none");
     });
     whichGraph = 2;
+    updateVisibleFilters(whichGraph);
 }
 
 
@@ -800,27 +860,51 @@ function updateChart3(data, selectedOpt="AQI_Unhealthy", title = "") {
             .text(title);
     }
 
-    //legend
+    //legend    
     const continents = Array.from(new Set(data.map(d => d["Continent"])));
-    const legend = svg.selectAll(".legend")
-        .data(continents)
-        .enter()
-        .append("g")
-        .attr("class", "legend")
-        .attr("transform", (d, i) => `translate(-5,${i * 20})`);
-
-    legend.append("rect")
-        .attr("x", width - 18)
-        .attr("width", 18)
-        .attr("height", 18)
-        .style("fill", d => colorScale(d));
-
-    legend.append("text")
-        .attr("x", width - 24)
-        .attr("y", 9)
-        .attr("dy", ".35em")
-        .style("text-anchor", "end")
-        .text(d => d);
+    const legend = svg.append("g")
+            .attr("class", "legend")
+            .attr("transform", `translate(${width - 150},${height - 250})`); //change height - 250 to move legend up
+    
+        // Add a background box for the legend
+        const boxWidth = 140;
+        const boxHeight = 150;
+        legend.append("rect")
+            .attr("width", boxWidth)
+            .attr("height", boxHeight)
+            .style("fill", "white")
+            .style("stroke", "black");
+    
+        // Add a heading to the legend inside the box
+        legend.append("text")
+            .attr("x", boxWidth / 2)
+            .attr("y", 15)
+            .style("text-anchor", "middle")
+            .style("font-size", "14px")
+            .text("Legend:");
+    
+        // Create individual legend items
+        const legendItems = legend.selectAll(".legend-item")
+            .data(continents)
+            .enter()
+            .append("g")
+            .attr("class", "legend-item")
+            .attr("transform", (d, i) => `translate(0,${i * 20 + 30})`); // Adjust vertical position
+    
+        // Add colored rectangles
+        legendItems.append("rect")
+            .attr("x", 5)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", d => colorScale(d));
+    
+        // Add text labels
+        legendItems.append("text")
+            .attr("x", 30)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("font-size", "12px")
+            .text(d => d);
 
 
     const tooltip = d3.select("#dot-tooltip");
@@ -838,98 +922,7 @@ function updateChart3(data, selectedOpt="AQI_Unhealthy", title = "") {
         tooltip.style("display", "none");
     });
     whichGraph = 3;
-    
-    // const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    // const width = 800 - margin.left - margin.right;
-    // const height = 600 - margin.top - margin.bottom;
-
-    // const svg = d3.select("#scatter-plot")
-    //     .attr("width", width + margin.left + margin.right)
-    //     .attr("height", height + margin.top + margin.bottom)
-    //     .append("g")
-    //     .attr("transform", `translate(${margin.left},${margin.top})`);
-
-    // const xScale = d3.scaleLinear()
-    //     .domain([0, d3.max(data, d => parseFloat(d["PM2.5_AQI_Value"]))])
-    //     .range([0, width]);
-
-    // const yScale = d3.scaleLinear()
-    //     .domain([0, d3.max(data, d => parseFloat(d["Ozone_AQI_Value"]))])
-    //     .range([height, 0]);
-
-    // //color scale for continents
-    // const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
-    // //size scale based on "PM2.5_Unhealthy" values
-    // const sizeScale = d3.scaleSqrt()
-    //     .domain([0, d3.max(data, d => parseFloat(d["PM2.5_Unhealthy"]))])
-    //     .range([2, 10]);
-
-    // //legend
-    // const continents = Array.from(new Set(data.map(d => d["Continent"])));
-    // const legend = svg.selectAll(".legend")
-    //     .data(continents)
-    //     .enter()
-    //     .append("g")
-    //     .attr("class", "legend")
-    //     .attr("transform", (d, i) => `translate(0,${i * 20})`);
-
-    // legend.append("rect")
-    //     .attr("x", width - 18)
-    //     .attr("width", 18)
-    //     .attr("height", 18)
-    //     .style("fill", d => colorScale(d));
-
-    // legend.append("text")
-    //     .attr("x", width - 24)
-    //     .attr("y", 9)
-    //     .attr("dy", ".35em")
-    //     .style("text-anchor", "end")
-    //     .text(d => d);
-
-
-    // svg.selectAll(".data-line").remove();
-    // svg.selectAll(".x-axis").remove();
-    // svg.selectAll(".y-axis").remove();
-    //svg.selectAll(".legend").remove();
-    // svg.selectAll(".dot").remove();
-    // svg.select("#x-axis-title").remove();
-    // svg.select("#y-axis-title").remove();
-    // svg.select("#chart-title").remove();
-
-    // //circles for each data point
-    // svg.selectAll(".dot")
-    //     .data(data)
-    //     .enter()
-    //     .append("circle")
-    //     .attr("class", "dot")
-    //     .attr("cx", d => xScale(parseFloat(d["PM2.5_AQI_Value"])))
-    //     .attr("cy", d => yScale(parseFloat(d["Ozone_AQI_Value"])))
-    //     .attr("r", d => sizeScale(parseFloat(d["PM2.5_Unhealthy"])))
-    //     .style("fill", d => colorScale(d["Continent"]));
-
-    // // Add x-axis
-    // svg.append("g")
-    //     .attr("transform", `translate(0,${height})`)
-    //     .call(d3.axisBottom(xScale));
-
-    // // Add y-axis
-    // svg.append("g")
-    //     .call(d3.axisLeft(yScale));
-
-    // // Add labels
-    // svg.append("text")
-    //     .attr("text-anchor", "end")
-    //     .attr("x", width / 2)
-    //     .attr("y", height + 40)
-    //     .text("Avg. PM2.5 AQI Value");
-
-    // svg.append("text")
-    //     .attr("text-anchor", "end")
-    //     .attr("transform", "rotate(-90)")
-    //     .attr("x", -height / 2)
-    //     .attr("y", -40)
-    //     .text("Avg. Ozone AQI Value");
+    updateVisibleFilters(whichGraph);
 }
 
 
@@ -945,6 +938,8 @@ async function initialise() {
         initialiseSVG();
         /*Plot.dot(Graph1Data, {x: "AQI_Value", y: "Num_Occurrences", fill: "Country", symbol: "Country"})
         .plot({nice: true, grid: true, symbol: {legend: true}})*/
+        
+        //updateVisibleFilters(whichGraph);
     drawKeyframe(keyframeIndex);
 
 }
