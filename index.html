@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Static Vis Implementation</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 class="title">Breath of the Earth by Hridansh Saraogi</h1>
+    </header>
+    <main class="wrapper">
+      <div class="left-column">
+        <div class="left-column-content">
+          <!-- TODO Add filler verse divs so that the content is centered vertically even at the start -->
+          <div classs="filler-verse"></div>
+          <ul class="verse" id="verse1">
+            <li class="line" id="line1">In cities named, where AQI does dwell,</li>
+            <li class="line" id="line2">A tale of air, we long to tell,</li>
+            <li class="line" id="line3">From good to unhealthy, from gray to blue,</li>
+            <li class="line" id="line4">In data's grasp, our choices few.</li>
+          </ul>
+
+          <ul class="verse" id="verse2">
+            <li class="line" id="line1">Carbon credits, currency of fate,</li>
+            <li class="line" id="line2">In this world, where we contemplate,</li>
+            <li class="line" id="line3">From nation's pride to metropolis,</li>
+            <li class="line" id="line4">AQI's truth, a shared synopsis.</li>
+          </ul>
+
+          <ul class="verse" id="verse3">
+            <li class="line" id="line1">With hopes held high, they dream anew,</li>
+            <li class="line" id="line2">In AQI categories, they find their cue,</li>
+            <li class="line" id="line3">From 'Good' to 'Unhealthy for Sensitive Groups', we see,</li>
+            <li class="line" id="line4">How clean or choked, the air can be, a fragile plea.</li>
+          </ul>
+
+          <ul class="verse" id="verse4">
+            <li class="line" id="line1">Like racing winds, we chart our course,</li>
+            <li class="line" id="line2">Through nitrogen's haze, we seek the source,</li>
+            <li class="line" id="line3">Though 'Good' for all, each value diverse,</li>
+            <li class="line" id="line4">AQI tales, in data scrolls, we traverse.</li>
+          </ul>
+
+          <ul class="verse" id="verse5">
+            <li class="line" id="line1">In every city's AQI report,</li>
+            <li class="line" id="line2">A call to action, a hopeful fort,</li>
+            <li class="line" id="line3">For in these numbers, we find the way,</li>
+            <li class="line" id="line4">To shape tomorrow, come what may.</li>
+          </ul>
+
+          <ul class="verse" id="verse6">
+            <li class="line" id="line1">In data's embrace, we'll seek our creed,</li>
+            <li class="line" id="line2">With cleaner air, our planet's need,</li>
+            <li class="line" id="line3">From AQI's tale, we'll not retreat,</li>
+            <li class="line" id="line4">A sustainable world, where all hearts beat.</li>
+          </ul>
+          <div classs="filler-verse"></div>
+        </div>
+      </div>
+      <div class="right-column">
+        <svg id="svg"></svg>
+      </div>
+      <div class="filters-column">
+        <h2>Filters:</h2>
+        <div class="slider-container">
+          <label for="xAxisSlider">X-Axis Filter: Explanation</label>
+          <input type="range" id="xAxisSlider" value=0>
+          <!-- <input type="range" id="xAxisSlider" min="0" max="421" value="421"> -->
+          <span id="xAxisSliderValue">0</span>
+        </div>
+
+        <div class="country-dropdown-container">
+          <label for="countryDropdown">Select Countries:</label>
+          <select id="countryDropdown" multiple></select>
+        </div>
+
+        <div class="variable-dropdown-container">
+          <label for="variableDropdown">Select Variable:</label>
+          <select id="variableDropdown"></select>
+        </div>
+
+        <div class="unhealthy-variables-dropdown-container">
+          <label for="unhealthyVariableDropdown">Choose Variable:</label>
+          <select id="unhealthyVariableDropdown"></select>
+        </div>
+        
+
+      </div>
+    </main>
+    <footer>
+      <button class="arrow-button" id="backward-button">◄</button>
+      <button class="arrow-button" id="forward-button">►</button>
+    </footer>
+    <div class="tooltip" id="line-tooltip"></div>
+    <div class="tooltip" id="dot-tooltip"></div>
+    <script src="main.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+<!-- Observable Plot's API: -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+  </body>
+</html>
