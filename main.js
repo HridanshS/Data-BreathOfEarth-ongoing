@@ -452,7 +452,33 @@ function updateChart1(data, selectedCountries=null, title = "") { //3 different 
     chart.select(".y-axis")
         .call(d3.axisLeft(yScale));*/
     
+    //legend
+    const colors = ["#FFFFFF", "#000000", "#CC0000"];
+    const dots = ["PM2_5_AQI_Value", "Ozone_AQI_Value", "AQI_Value"];
+    const legend = svg.selectAll(".legend")
+        .data(dots)
+        .enter()
+        .append("g")
+        .attr("class", "legend")
+        //.attr("transform",  "translate(" + 50 + "," + 26 + ")");
+        .attr("transform", (d, i) => `translate(-5,${i * 20})`);
 
+    legend.append("rect")
+        .attr("x", width - 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", d => colors[d]);
+    
+    // legend.append("polygon")
+    //     .attr("points", "0,-4 2,4 -2,4")
+    //     .style("fill", "#000000");
+
+    legend.append("text")
+        .attr("x", width - 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(d => d);
     
     // Handle click on a data point
     svg.selectAll(".data-point")
@@ -625,10 +651,12 @@ function updateChart2(data, selectedVar="AQI.Value", title = "") { //3 different
 
     const tooltip = d3.select("#line-tooltip");
 
+
     svg.selectAll(".data-line")
     .on("mouseover", (event) => {
         // Calculate the x-value based on the cursor's position
-        const xValue = xScale.invert(event.offsetX);
+        //const xValue = xScale.invert(event.offsetX);
+        const xValue = xScale.invert(d3.pointer(event)[0]);
 
         // Find the closest data point based on the x-value
         const closestDataPoint = findClosestDataPoint(data, xValue);

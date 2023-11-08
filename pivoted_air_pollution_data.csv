@@ -1,4 +1,4 @@
-"Country","Num_Occurrences","AQI_Value","CO_AQI_Value","Ozone_AQI_Value","NO2_AQI_Value","PM2.5_AQI_Value","Continent"
+"Country","Num_Occurrences","AQI_Value","CO_AQI_Value","Ozone_AQI_Value","NO2_AQI_Value","PM2_5_AQI_Value","Continent"
 "Afghanistan",49,95.96,0.59,40.18,0.02,95.92,"Asia"
 "Albania",32,68.25,1,42.06,0.72,68.09,"Europe"
 "Algeria",12,88.17,1.92,47.17,9.33,80.25,"Africa"
