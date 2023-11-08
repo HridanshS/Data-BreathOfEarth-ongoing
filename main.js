@@ -512,7 +512,7 @@ function updateChart1(data, selectedCountries=null, title = "") { //3 different 
         .call(d3.axisLeft(yScale));*/
     
     //legend
-    const colors = ["#FFFFFF", "#000000", "#CC0000"];
+    /*const colors = ["#FFFFFF", "#000000", "#CC0000"];
     const dots = ["PM2_5_AQI_Value", "Ozone_AQI_Value", "AQI_Value"];
     const legend = svg.selectAll(".legend")
         .data(dots)
@@ -537,7 +537,53 @@ function updateChart1(data, selectedCountries=null, title = "") { //3 different 
         .attr("y", 9)
         .attr("dy", ".35em")
         .style("text-anchor", "end")
-        .text(d => d);
+        .text(d => d);*/
+
+        const colors = ["#FFFFFF", "#000000", "#CC0000"];
+        const dots = ["PM2_5_AQI_Value", "Ozone_AQI_Value", "AQI_Value"];
+        const legend = svg.append("g")
+                .attr("class", "legend")
+                .attr("transform", `translate(${width - 150},${height - 250})`); //change height - 250 to move legend up
+        
+            // Add a background box for the legend
+            const boxWidth = 140;
+            const boxHeight = 100;
+            legend.append("rect")
+                .attr("width", boxWidth)
+                .attr("height", boxHeight)
+                .style("fill", "white")
+                .style("stroke", "black");
+        
+            // Add a heading to the legend inside the box
+            legend.append("text")
+                .attr("x", boxWidth / 2)
+                .attr("y", 15)
+                .style("text-anchor", "middle")
+                .style("font-size", "14px")
+                .text("Legend:");
+        
+            // Create individual legend items
+            const legendItems = legend.selectAll(".legend-item")
+                .data(dots)
+                .enter()
+                .append("g")
+                .attr("class", "legend-item")
+                .attr("transform", (d, i) => `translate(0,${i * 20 + 30})`); // Adjust vertical position
+        
+            // Add colored rectangles
+            legendItems.append("rect")
+                .attr("x", 5)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", d => colors[d]);
+        
+            // Add text labels
+            legendItems.append("text")
+                .attr("x", 30)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("font-size", "12px")
+                .text(d => d);
     
     // Handle click on a data point
     svg.selectAll(".data-point")
