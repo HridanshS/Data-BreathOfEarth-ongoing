@@ -35,9 +35,13 @@ Some of the features I have implemented:
 - ability to click on points to focus on a certain country
 - For Graph 2 ability to choose which variable should display
 - For Graph 2, hover over tooltip
+- Only relevant filters for visualization show in Filters panel
+- Hover over for Graph3 where more information is visible on each dot
 
 
 Ways in which I have built on feedback from M3 Static Viz Design:
 - Improved on labels - earlier ones had some unclear labels
 - Only indicators/variables with comparable ranges used on graphs where multiple indicators are displayed
 - Shape encoding clarified in Graph 1
+- Profesor was initally skeptical of "bubble size" idea. With the filter to choose variable, I feel the value is better clarified
+--- the difference in dot size is clearly visible. Hover shows the exact information. User can use difference in dots to see how many cities were categorized as 'Unhealthy' or 'Very Unhealthy' (for the Choosen Variable) on the day the data was recorded
