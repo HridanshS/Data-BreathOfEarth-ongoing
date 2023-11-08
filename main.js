@@ -54,6 +54,7 @@ document.getElementById("backward-button").addEventListener("click", backwardCli
 
 let Graph1Data;
 let AggFreqData; //Graph2
+var whichGraph = null;
 
 async function loadData() {
     
@@ -517,6 +518,7 @@ function updateChart1(data, selectedCountries=null, title = "") { //3 different 
         svg.select("#chart-title")
             .text(title);
     }
+    whichGraph = 1;
 }
 
 
@@ -671,6 +673,7 @@ function updateChart2(data, selectedVar="AQI.Value", title = "") { //3 different
         // Hide the tooltip on mouseout
         tooltip.style("display", "none");
     });
+    whichGraph = 2;
 }
 
 
@@ -834,6 +837,8 @@ function updateChart3(data, selectedOpt="AQI_Unhealthy", title = "") {
         // Hide the tooltip on mouseout
         tooltip.style("display", "none");
     });
+    whichGraph = 3;
+    
     // const margin = { top: 50, right: 50, bottom: 50, left: 50 };
     // const width = 800 - margin.left - margin.right;
     // const height = 600 - margin.top - margin.bottom;
