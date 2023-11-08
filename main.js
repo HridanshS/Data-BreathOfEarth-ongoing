@@ -551,7 +551,7 @@ function updateChart1(data, selectedCountries=null, title = "") { //3 different 
             legend.append("rect")
                 .attr("width", boxWidth)
                 .attr("height", boxHeight)
-                .style("fill", "white")
+                .style("fill", "orange")
                 .style("stroke", "black");
         
             // Add a heading to the legend inside the box
@@ -575,7 +575,7 @@ function updateChart1(data, selectedCountries=null, title = "") { //3 different 
                 .attr("x", 5)
                 .attr("width", 18)
                 .attr("height", 18)
-                .style("fill", d => colors[d]);
+                .style("fill", (d, i) => colors[i]);
         
             // Add text labels
             legendItems.append("text")
@@ -886,7 +886,7 @@ function updateChart3(data, selectedOpt="AQI_Unhealthy", title = "") {
         .attr("id", "y-axis-title")
         .attr("transform", "rotate(-90)")
         .attr("x", -(height/2)+10)//width / 2)
-        .attr("y", 14)
+        .attr("y", 25)
         .attr("text-anchor", "middle")
         .style("font-size", "14px")
         .style("fill", "black")
