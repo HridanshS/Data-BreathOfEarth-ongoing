@@ -62,6 +62,113 @@
         <svg id="svg"></svg>
       </div>
       <div class="filters-column">
+        
+        <div class="split">
+          
+          <div class="info-button" id="info2">
+            <button class="info-button-btn">ℹ</button>
+            <div class="tooltip" id="tooltip2">
+              <!-- Tooltip content for the second button -->
+              [3/3]<br>
+              Two more Visualizations to go! Feel free to play around with Viz Uno and come back<br>
+              When you are ready, press the arrow at bottom of your screen
+              <p>
+                <strong>Visualization Dos</strong> <br>
+                This viz is now looking at the data at a city-level - each record in the dataset<br>
+                The x-axis shows the AQI Index value - the specific index being looked at can be changed with the 'Select Variable' dropdown<br>
+                On the y-axis we see how many times did a specific value (from the x-axis) occur in the entire dataset. In other words, 
+                how many times (cummulative) was that particular variable value experienced across the world, based on the data?
+                <br>
+                Hover over the red line to see the exact information about the specific datapoint<br>
+                <strong>Viz's Goal: </strong> Aid in discerning the distribution of the AQI Variable at a global scale<br>
+                Viz helps recognise aspects such as the most common AQI value globally
+              </p>
+              <p>
+                <strong>Visualization Tres</strong> <br>
+                After exploring at a country level, we moved to a city level, now let's move up the granularity index and see things at a Continent perspective.
+                The continent was not mentioned in the original Kaggle dataset and was added later<br> <br>
+                Here we can see 2 vars (pre-defined) - avg Ozone AQI Value & avg PM2.5 AQI Value (each is aggregated at a Continent level and hence are averages) - on the y and x axis respectively.
+                <br>
+                This viz helps us see where each continent is placed based on its AQI Value for two different variables. From this viz, we can recognize that Asia performs poorly 
+                on both particulate matter in the air (PM2.5) and the presence of Ozone in the air. 
+                <br> <br>
+                Also note the size of dots: the dot sizes differ - it is another variable encoding (which can be chosen from the 'Choose Variable' filter). 
+                This var controls the size of the dots. <br> The default AQI_Unhealthy means the continents are classified (in sizing) based on the number of cities
+                that were tagged 'Unhealthy' or 'Very Unhealthy' based on their Overall AQI value. Hover over point to see the # of Unhealthy cities in continent
+                <br>
+                <b>Note: </b>some continents are better represented in data (caution in making comparisons)
+              </p>
+              Source: https://github.com/dbouquin/IS_608/blob/master/NanosatDB_munging/Countries-Continents.csv
+            </div>
+          </div>
+          
+          <div class="info-button" id="info3">
+            <button class="info-button-btn">ℹ</button>
+            <div class="tooltip" id="tooltip3">
+              <!-- Tooltip content for the second button -->
+              [2/3]<br>
+              Awesome job reaching here!
+              Now, let me tell you more about my poetic journey:
+              <p>
+                My journey has culminated in this project. It has been quite an exploration of my emotions and experiences. 
+                While conveying my feelings has been challenging, the process has been remarkably rewarding.
+                Crafting the verses - that you see on your left - are meant to resonate with my readers (you guys) and capture the importance of sustainability; this has been both fun and fulfilling. 
+                <br> <br>
+                Enough about me, let's talk about the 1st Visualization (linked to 1st verse)
+              </p>
+              <p>
+                <strong>Visualization Uno</strong> <br>
+                This Viz shows three AQI Values (names in legend) by the number of times the Country is mentioned (or appears) in my AQI dataset.
+                So for each country, there are three markers - all three markers for a specific country share the same y-axis value 
+                (because the # of times a country appeared in the dataset does not change - it is a constant fact).
+                <br>
+                On the x-axis you can read the value for each of these markers. It is interesting that three different variables (represented as markers) 
+                all fit on the same x-axis range (this was intentional!). As with all AQI values in this dataset, the lower the value, the better the air quality               
+              </p>
+              <p>
+                Yes, the viz looks very messy at first - all the datapoints make it look cluttered. Don't you worry...I have a trick for you<br>
+                <b>Focus mode:</b> Click on any marker on the visualization itself and voila! All the markers (3) for that specific country are highlighted<br>
+                Phew, this makes it easier to compare the three markers/variables for the specific country. <b>Want to go back?</b> Just click on any of the highlighted markers again and like a switch, it toggles off!
+              </p>
+              <p>
+                <b>Use the filters:</b> There are 2 filters for this viz which aid your understanding of data<br>
+                Only want countries in a certain value range? Use the X-Axis Filter (the blue slider)<br>
+                Want to look at a specifc country by name? Scroll in the 'Select Countries' filter and find them. You can choose multiple countries too!
+              </p>
+
+            </div>
+          </div>
+
+          <div class="info-button" id="info1">
+            <button class="info-button-btn">ℹ</button>
+            <div class="tooltip" id="tooltip1">
+              [1/3]<br>
+              Hello! Welcome to my Interactive Visualization Implementation :) 
+              <p>
+                In this project, I have an interactive implementation of my data-driven poem. There are various different interactivities & I am going to walk you through it. <br>
+                First, let us start with data <br>
+              </p>
+              <p>
+                <strong>THE DATA</strong><br>
+                This dataset offers a comprehensive view of air quality, focusing on key pollutants that significantly impact public health.<br>
+                It encompasses AQI (Air Quality Index) values from various cities worldwide, covering a range of pollutants like Nitrogen Dioxide (NO2), Ozone (O3), Carbon Monoxide (CO), and Particulate Matter (PM2.5). <br><br>
+                
+                This dataset serves as a valuable resource for studying air pollution's global impact on public well-being and environmental health.
+              </p>
+              <ul>
+                <li>NO2, originating from both natural and human sources, poses health risks, especially to individuals with respiratory conditions.</li>
+                <li>Ozone, when present at ground level due to chemical reactions, can lead to chest discomfort and lung problems.</li>
+                <li>CO (Carbon Monoxide), primarily emitted by vehicles and certain appliances, can be hazardous, affecting oxygen transport in the bloodstream.</li>
+                <li>Particulate Matter, classified as a carcinogen, includes fine particles that can lead to severe heart and lung issues.</li>
+              </ul>
+                <p>Time to move to the <b>next info button</b>...just move your cursor right!</p>
+                <p>Source of the dataset: https://www.kaggle.com/datasets/hasibalmuzdadid/global-air-pollution-dataset</p>
+            </div>
+          </div>
+        </div>
+        
+
+        
         <h2>Filters:</h2>
         <div class="slider-container">
           <label id="xAxisSliderText" for="xAxisSlider">X-Axis Filter: Explanation</label>
@@ -84,17 +191,21 @@
           <label id="unhealthyVariableDropdownText" for="unhealthyVariableDropdown">Choose Variable:</label>
           <select id="unhealthyVariableDropdown"></select>
         </div>
+
+
         
 
       </div>
+        
     </main>
     <footer>
       <button class="arrow-button" id="backward-button">◄</button>
       <button class="arrow-button" id="forward-button">►</button>
     </footer>
-    <div class="tooltip" id="line-tooltip"></div>
-    <div class="tooltip" id="dot-tooltip"></div>
+    <div class="tooltip-data" id="line-tooltip"></div>
+    <div class="tooltip-data" id="dot-tooltip"></div>
     <script src="main.js"></script>
+    <script src="script.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>

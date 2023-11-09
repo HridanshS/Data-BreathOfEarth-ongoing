@@ -844,9 +844,16 @@ function updateChart3(data, selectedOpt="AQI_Unhealthy", title = "") {
     const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     //size scale based on "PM2.5_Unhealthy" values
+    // const sizeScale = d3.scaleSqrt()
+    //     .domain([0, d3.max(data, d => parseFloat(d[selectedOpt]))])
+    //     .range([2, 10]);
+    const minimumSize = 5; // Define the minimum size for the dots
+    const maxSize = 15; // Define the maximum size for the dots
+    const maxDataValue = d3.max(data, d => parseFloat(d[selectedOpt]));
+
     const sizeScale = d3.scaleSqrt()
-        .domain([0, d3.max(data, d => parseFloat(d[selectedOpt]))])
-        .range([2, 10]);
+        .domain([0, maxDataValue])
+        .range([minimumSize, maxSize]);
 
     //circles for each data point
     svg.selectAll(".dot")
